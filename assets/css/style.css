@@ -1,0 +1,259 @@
+/* Variables globales */
+:root {
+    --primary-color: #17a2b8; /* Color principal para botones e íconos */
+    --text-color: #333; /* Color principal del texto */
+    --background-color: #fff; /* Color de fondo general */
+    --header-footer-bg: #000; /* Color de fondo para cabecera y pie de página */
+}
+
+/* Estilos básicos */
+body, html {
+    margin: 0;
+    padding: 0;
+    font-family: 'Roboto', sans-serif; /* Asegúrate de que la fuente Roboto está cargada */
+    color: var(--text-color);
+    background-color: var(--background-color);
+}
+
+a {
+    color: var(--primary-color);
+    text-decoration: none; /* Elimina el subrayado de los enlaces */
+}
+
+a:hover {
+    text-decoration: underline; /* Añade un subrayado al pasar el ratón por encima para mejorar la accesibilidad */
+}
+
+/* Encabezado y pie de página */
+header, footer {
+    background-color: var(--header-footer-bg);
+    color: white;
+    padding: 10px 0;
+    text-align: center;
+}
+
+/* Navbar estilos */
+.navbar {
+    background-color: var(--primary-color);
+}
+
+.navbar .navbar-nav .nav-link {
+    color: white;
+}
+
+.navbar .navbar-nav .nav-link:hover,
+.navbar .navbar-nav .nav-link.active {
+    background-color: rgba(0, 0, 0, 0.1);
+}
+
+/* Carrusel */
+.carousel-item {
+    text-align: center;
+    color: white;
+}
+
+.carousel-caption {
+    background-color: rgba(0, 0, 0, 0.5); /* Semi-transparente para mejorar la legibilidad */
+    border-radius: 5px;
+    padding: 10px;
+}
+
+/* Secciones de contenido */
+.container {
+    padding: 20px;
+}
+
+.section-title {
+    color: var(--primary-color);
+    margin-bottom: 15px;
+}
+
+.img-fluid {
+    max-width: 100%;
+    height: auto;
+}
+
+/* Estilos de los botones */
+.btn {
+    border: none;
+    border-radius: 5px;
+    padding: 10px 20px;
+}
+
+.btn-outline-light {
+    border-color: white;
+    color: white;
+}
+
+.btn-outline-light:hover {
+    background-color: white;
+    color: var(--primary-color);
+}
+
+/* Estilos específicos para la página de registro */
+.background-image {
+    background-image: url('/assets/img/inicio.jpg'); /* Ruta de la imagen de fondo */
+    background-size: cover; /* Cubrir todo el cuerpo */
+    background-position: center; /* Centrar la imagen */
+}
+
+/* Estilos para tarjetas */
+#featured-photos {
+    background-color: #f8f9fa; /* Un fondo claro para destacar la sección */
+    padding: 20px 0;
+}
+
+#featured-photos .card {
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Sombra suave para las tarjetas */
+    transition: transform 0.3s ease-in-out; /* Efecto de transformación al pasar el ratón */
+}
+
+#featured-photos .card:hover {
+    transform: translateY(-5px); /* Levanta la tarjeta al pasar el ratón */
+}
+
+#featured-photos .card-img-top {
+    height: 200px; /* Altura fija para las imágenes */
+    object-fit: cover; /* Asegura que las imágenes cubran completamente el espacio asignado */
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .navbar .navbar-nav .nav-link {
+        padding: 10px; /* Aumenta el padding para un mejor toque en pantallas táctiles */
+    }
+
+    header, .carousel-caption {
+        text-align: center; /* Asegura que todo esté centrado en dispositivos móviles */
+    }
+}
+
+/* Estilos del formulario de registro */
+.registro {
+    background-color: rgba(255, 255, 255, 0.9);
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    margin: 20px auto;
+    max-width: 800px;
+}
+
+.registro h2 {
+    color: #17a2b8; /* Color principal */
+    margin-bottom: 20px;
+    font-size: 1.75rem;
+}
+
+.registro .form-group {
+    margin-bottom: 15px;
+}
+
+.registro .form-label {
+    color: #17a2b8; /* Color principal */
+}
+
+.registro .form-control {
+    border-radius: 5px;
+    padding: 10px;
+}
+
+.registro .form-check-label {
+    color: #17a2b8; /* Color principal */
+}
+
+.registro .btn {
+    background-color: #17a2b8; /* Color principal */
+    border: none;
+    border-radius: 5px;
+    padding: 10px 20px;
+    color: white;
+    cursor: pointer;
+}
+
+.registro .btn:hover {
+    background-color: #138496; /* Color más oscuro en hover */
+}
+
+.invalid-feedback {
+    display: none;
+    color: red;
+}
+
+.was-validated .form-control:invalid ~ .invalid-feedback {
+    display: block;
+}
+
+/* Estilos del perfil */
+.perfil {
+    padding-top: 50px; /* Espacio entre el header y el contenido */
+}
+
+.perfil .row {
+    margin-bottom: 20px;
+}
+
+.perfil .card {
+    border: 1px solid #e0e0e0;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Sombra suave para las tarjetas */
+}
+
+.perfil .card img {
+    height: 200px; /* Altura fija para las imágenes */
+    object-fit: cover; /* Asegura que las imágenes cubran completamente el espacio asignado */
+}
+
+.perfil .badge {
+    font-size: 0.9rem;
+}
+
+.perfil .nav-tabs {
+    border-bottom: 2px solid #007bff;
+}
+
+.perfil .nav-link {
+    color: #007bff;
+    font-weight: bold;
+}
+
+.perfil .nav-link.active {
+    color: #0056b3;
+    border-color: #0056b3;
+}
+
+/* Estilos de la sección "Sobre mí" */
+.perfil .d-flex {
+    margin-bottom: 15px;
+}
+
+.perfil h4 {
+    margin-bottom: 10px;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .perfil {
+        padding-top: 30px;
+    }
+
+    .perfil .d-flex {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .perfil .d-flex a {
+        margin-top: 10px;
+    }
+}
+.profile-icon-wrapper {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 150px;
+    width: 150px;
+    margin: 0 auto 20px auto;
+}
+
+.profile-icon-wrapper i {
+    font-size: 150px; /* Ajusta el tamaño del icono */
+    color: #ccc; /* Color del icono */
+}
