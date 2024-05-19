@@ -24,11 +24,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="col-lg-4">
-                    <div class="d-flex align-items-center justify-content-end">
-                        <a href="../vista/login.php" class="btn btn-light btn-lg btn-outline-white rounded-pill py-0 px-2"><i class="fas fa-user-plus text-dark me-2"></i></a>
-                    </div>
-                </div>
+               
             </div>
         </div>
     </header>

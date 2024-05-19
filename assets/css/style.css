@@ -186,6 +186,7 @@ header, footer {
 /* Estilos del perfil */
 .perfil {
     padding-top: 50px; /* Espacio entre el header y el contenido */
+    padding-bottom: 50px; 
 }
 
 .perfil .row {
@@ -229,21 +230,15 @@ header, footer {
     margin-bottom: 10px;
 }
 
-/* Responsive Design */
-@media (max-width: 768px) {
-    .perfil {
-        padding-top: 30px;
-    }
-
-    .perfil .d-flex {
-        flex-direction: column;
-        align-items: flex-start;
-    }
-
-    .perfil .d-flex a {
-        margin-top: 10px;
-    }
+.perfil .d-flex a {
+    width: 100%;
+    text-align: center;
 }
+
+.perfil .d-flex .btn {
+    margin-bottom: 10px;
+}
+
 .profile-icon-wrapper {
     display: flex;
     justify-content: center;

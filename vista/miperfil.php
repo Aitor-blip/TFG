@@ -9,8 +9,11 @@ require_once '../controlador/perfil_controlador.php';
     <div class="row">
         <div class="col-md-3 text-center">
             <div class="profile-icon-wrapper">
-                <?php if (!empty($user['foto'])): ?>
-                    <img src="/assets/img/<?php echo htmlspecialchars($user['foto']); ?>" alt="Foto de perfil" class="img-fluid rounded-circle mb-3" style="width: 150px; height: 150px;">
+                <?php 
+                // Verificar si la ruta de la imagen es una URL completa o una ruta relativa
+                $profileImagePath = htmlspecialchars($user['foto']);
+                if (!empty($user['foto']) && (strpos($profileImagePath, 'http') === 0 || file_exists($profileImagePath))): ?>
+                    <img src="<?php echo $profileImagePath; ?>" alt="Foto de perfil" class="img-fluid rounded-circle mb-3" style="width: 150px; height: 150px;">
                 <?php else: ?>
                     <i class="fas fa-user-circle fa-9x text-muted"></i>
                 <?php endif; ?>
@@ -19,9 +22,12 @@ require_once '../controlador/perfil_controlador.php';
             <p><?php echo ($totalRatings > 0) ? getStarRating($ratingAverage) . " $ratingAverage de 5 (de $totalRatings valoraciones)" : "Aún no hay valoraciones"; ?></p>
         </div>
         <div class="col-md-9">
-            <div class="d-flex justify-content-between">
-                <h4>Sobre mí</h4>
-                <a href="editar_perfil.php" class="btn btn-outline-primary"><i class="fas fa-pencil-alt"></i> Editar perfil</a>
+            <div class="d-flex flex-column align-items-end">
+                <a href="editar_perfil.php" class="btn btn-outline-info mb-2"><i class="fas fa-pencil-alt"></i> Editar perfil</a>
+                <form action="../controlador/borrar_perfil_controlador.php" method="post">
+                    <input type="hidden" name="confirm_delete" value="yes">
+                    <button type="submit" class="btn btn-outline-danger"><i class="fas fa-trash-alt"></i> Borrar perfil</button>
+                </form>
             </div>
             <p><?php echo htmlspecialchars($user['descripcion']); ?></p>
             <h5>Información verificada:</h5>

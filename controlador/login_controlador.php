@@ -9,7 +9,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $database = new Database();
     $db = $database->getConnection();
 
-    $query = "SELECT Usuarios.idUsuario, Usuarios.nombreUsuario, Usuarios.password, Roles.nombreRol 
+    $query = "SELECT Usuarios.idUsuario, Usuarios.nombreUsuario, Usuarios.password, Usuarios.fechaBaja, Roles.nombreRol 
               FROM Usuarios 
               JOIN Usuarios_Roles ON Usuarios.idUsuario = Usuarios_Roles.idUsuario 
               JOIN Roles ON Usuarios_Roles.idRol = Roles.idRol 
@@ -20,6 +20,14 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     
     if ($stmt->rowCount() == 1) {
         $row = $stmt->fetch(PDO::FETCH_ASSOC);
+        
+        // Verificar si el usuario está dado de baja
+        if (!is_null($row['fechaBaja'])) {
+            $error = "Tu cuenta ha sido dada de baja. Por favor, regístrate nuevamente.";
+            header("Location: ../vista/login.php?error=" . urlencode($error));
+            exit();
+        }
+        
         if (password_verify($password, $row['password'])) {
             $_SESSION['user_id'] = $row['idUsuario'];
             $_SESSION['username'] = $row['nombreUsuario'];
