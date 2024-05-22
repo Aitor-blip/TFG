@@ -43,9 +43,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                 case 'comprador':
                     header("Location: ../vista/principal.php");
                     break;
-                case 'invitado':
-                    header("Location: /vista/principal.php");
-                    break;
+          
                 default:
                     $error = "Tipo de usuario no reconocido.";
                     header("Location: ../vista/login.php?error=" . urlencode($error));

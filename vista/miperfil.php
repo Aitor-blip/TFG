@@ -43,18 +43,25 @@ require_once '../controlador/perfil_controlador.php';
     </ul>
     <div class="tab-content" id="myTabContent">
         <div class="tab-pane fade show active" id="armario" role="tabpanel" aria-labelledby="armario-tab">
+            <div class="d-flex justify-content-end mt-3">
+                <a href="subir_producto.php" class="btn btn-primary">Subir productos</a>
+            </div>
             <div class="row mt-3">
                 <?php if ($role == 'vendedor'): ?>
                     <?php foreach ($products as $product): ?>
                         <div class="col-md-4 mb-4">
                             <div class="card">
-                                <img src="/assets/img/<?php echo htmlspecialchars($product['foto']); ?>" class="card-img-top" alt="Foto del producto">
+                                <div style="width: 100%; height: 250px; overflow: hidden;">
+                                    <img src="../assets/uploads/<?php echo htmlspecialchars($product['foto']); ?>" class="card-img-top" alt="Foto del producto" style="width: 100%; height: 100%; object-fit: cover;">
+                                </div>
                                 <div class="card-body">
                                     <h5 class="card-title"><?php echo htmlspecialchars($product['nombreProducto']); ?></h5>
                                     <p class="card-text"><?php echo htmlspecialchars($product['descripcion']); ?></p>
                                     <p class="card-text"><strong>Precio:</strong> €<?php echo htmlspecialchars($product['precio']); ?></p>
                                     <p class="card-text"><strong>Talla:</strong> <?php echo htmlspecialchars($product['talla']); ?></p>
                                     <span class="badge <?php echo getProductStatusClass($product['estado']); ?>"><?php echo htmlspecialchars($product['estado']); ?></span>
+                                    <a href="editar_producto.php?id=<?php echo $product['idProducto']; ?>" class="btn btn-warning mt-2">Editar</a>
+                                    <a href="../controlador/borrar_producto_controlador.php?id=<?php echo $product['idProducto']; ?>" class="btn btn-danger mt-2">Borrar</a>
                                 </div>
                             </div>
                         </div>
@@ -62,14 +69,15 @@ require_once '../controlador/perfil_controlador.php';
                     <?php if (empty($products)): ?>
                         <div class="col-12 text-center">
                             <p>No tienes productos en tu armario.</p>
-                            <a href="subir_producto.php" class="btn btn-primary">Subir productos</a>
                         </div>
                     <?php endif; ?>
                 <?php elseif ($role == 'comprador'): ?>
                     <?php foreach ($purchases as $purchase): ?>
                         <div class="col-md-4 mb-4">
                             <div class="card">
-                                <img src="/assets/img/<?php echo htmlspecialchars($purchase['foto']); ?>" class="card-img-top" alt="Foto del producto">
+                                <div style="width: 100%; height: 250px; overflow: hidden;">
+                                    <img src="../assets/uploads/<?php echo htmlspecialchars($purchase['foto']); ?>" class="card-img-top" alt="Foto del producto" style="width: 100%; height: 100%; object-fit: cover;">
+                                </div>
                                 <div class="card-body">
                                     <h5 class="card-title"><?php echo htmlspecialchars($purchase['nombreProducto']); ?></h5>
                                     <p class="card-text"><?php echo htmlspecialchars($purchase['descripcion']); ?></p>

@@ -92,7 +92,7 @@ header, footer {
 
 /* Estilos específicos para la página de registro */
 .background-image {
-    background-image: url('/assets/img/inicio.jpg'); /* Ruta de la imagen de fondo */
+    background-image: url('assets/img/inicio.jpg');
     background-size: cover; /* Cubrir todo el cuerpo */
     background-position: center; /* Centrar la imagen */
 }
@@ -199,8 +199,9 @@ header, footer {
 }
 
 .perfil .card img {
-    height: 200px; /* Altura fija para las imágenes */
-    object-fit: cover; /* Asegura que las imágenes cubran completamente el espacio asignado */
+    height: 250px !important; /* Altura fija para las imágenes */
+    object-fit: cover !important; /* Asegura que las imágenes cubran completamente el espacio asignado */
+    width: 100% !important; /* Asegura que las imágenes cubran todo el ancho de la tarjeta */
 }
 
 .perfil .badge {
@@ -251,4 +252,11 @@ header, footer {
 .profile-icon-wrapper i {
     font-size: 150px; /* Ajusta el tamaño del icono */
     color: #ccc; /* Color del icono */
+}
+
+/* Estilos adicionales para asegurar que las imágenes de los productos sean del mismo tamaño */
+.fixed-size-img {
+    width: 100% !important;
+    height: 250px !important;
+    object-fit: cover !important;
 }

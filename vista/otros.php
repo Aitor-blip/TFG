@@ -5,8 +5,7 @@ require_once '../config/conexion.php'; // Asegúrate de que la ruta al archivo d
 $database = new Database();
 $db = $database->getConnection();
 
-// Ajustar la consulta para no diferenciar entre mayúsculas y minúsculas
-$query = "SELECT * FROM Productos WHERE LOWER(nombreProducto) = 'braga' OR LOWER(nombreProducto) = 'tanga' OR idCategoria = 1";
+$query = "SELECT * FROM Productos WHERE idCategoria = 5"; // Asumiendo que 5 es el id de la categoría "Otros"
 $stmt = $db->prepare($query);
 $stmt->execute();
 $products = $stmt->fetchAll(PDO::FETCH_ASSOC);
@@ -15,7 +14,7 @@ include '../includes/header.php'; // Incluye el header de tu sitio web
 ?>
 
 <div class="container mt-5">
-    <h2 class="mb-4">Productos de Bragas y Tangas</h2>
+    <h2 class="mb-4">Productos de Otros</h2>
     <div class="row">
         <?php foreach ($products as $product): ?>
             <div class="col-md-4 mb-4">

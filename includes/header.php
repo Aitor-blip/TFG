@@ -7,7 +7,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">
-    <link href="/assets/css/style.css" rel="stylesheet">
+    <link href="assets/css/style.css" rel="stylesheet">
 </head>
 <body>
     <header class="copyright py-3" style="background-color: #000000;">
@@ -41,12 +41,12 @@
                     <li class="nav-item dropdown">
                         <a href="#" class="nav-link dropdown-toggle ml-2 fs-4" role="button" data-bs-toggle="dropdown" aria-expanded="false">Categorias</a>
                         <div class="dropdown-menu">
-                            <a href="#" class="dropdown-item">Todo</a>
-                            <a href="#" class="dropdown-item">Bragas y Tangas</a>
-                            <a href="#" class="dropdown-item">Sujetadores</a>
-                            <a href="#" class="dropdown-item">Fotos de pies</a>
-                            <a href="#" class="dropdown-item">Juguetes sexuales</a>
-                            <a href="#" class="dropdown-item">Otros</a>
+                            <a href="../vista/todos.php" class="dropdown-item">Todo</a>
+                            <a href="../vista/braga.php" class="dropdown-item">Bragas y Tangas</a>
+                            <a href="../vista/sujetadores.php" class="dropdown-item">Sujetadores</a>
+                            <a href="../vista/fotosdepies.php" class="dropdown-item">Fotos de pies</a>
+                            <a href="../vista/juguetessexuales.php" class="dropdown-item">Juguetes sexuales</a>
+                            <a href="../vista/otros.php" class="dropdown-item">Otros</a>
                         </div>
                     </li>
                     <li class="nav-item dropdown">
