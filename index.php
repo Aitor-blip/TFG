@@ -6,8 +6,9 @@
     <title>DesireCloset</title>
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/css/bootstrap.min.css" rel="stylesheet">
+    <link href="./assets/css/style.css" rel="stylesheet">
 </head>
-<body class="background-image">
+<body>
 
 <!-- CONTENIDO -->
 <div class="container-fluid d-flex align-items-center justify-content-center min-vh-100 ">

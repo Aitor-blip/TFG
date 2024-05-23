@@ -59,6 +59,14 @@ CREATE TABLE Productos (
     FOREIGN KEY (idCategoria) REFERENCES Categorias(idCategoria)
 );
 
+CREATE TABLE MeGusta (
+    idMeGusta INT AUTO_INCREMENT PRIMARY KEY,
+    idProducto INT,
+    idUsuario INT,
+    FOREIGN KEY (idProducto) REFERENCES Productos(idProducto),
+    FOREIGN KEY (idUsuario) REFERENCES Usuarios(idUsuario)
+);
+
 -- Tabla Mensajes
 CREATE TABLE Mensajes (
     idMensaje INT AUTO_INCREMENT PRIMARY KEY,

@@ -12,19 +12,21 @@
 <body>
     <header class="copyright py-3" style="background-color: #000000;">
         <div class="container px-0">
-            <div class="row align-items-center">
-                <div class="col-lg-8">
-                    <div class="d-flex flex-wrap align-items-center">
-                        <a href="#" class="navbar-brand">
-                            <img src="../assets/img/logo.jpg" alt="Logo de DesireCloset" class="logo" style="width:100px;">
-                        </a>
-                        <div class="ms-2">
-                            <h2 class="text-info display-6 mb-0">DesireCloset</h2>
-                            <h5 class="text-info text-center display-10 mb-0">Conectando Fantasias</h5>
-                        </div>
+            <div class="row align-items-center justify-content-between">
+                <div class="col-lg-8 d-flex align-items-center">
+                    <a href="#" class="navbar-brand">
+                        <img src="../assets/img/logo.jpg" alt="Logo de DesireCloset" class="logo" style="width:100px;">
+                    </a>
+                    <div class="ms-2">
+                        <h2 class="text-info display-6 mb-0">DesireCloset</h2>
+                        <h5 class="text-info text-center display-10 mb-0">Conectando Fantasias</h5>
                     </div>
                 </div>
-               
+                <div class="col-lg-4 text-end">
+                    <form action="../vista/logout.php" method="post" class="d-inline">
+                        <button type="submit" class="btn btn-link text-info p-0"><i class="fas fa-sign-out-alt fa-lg"></i> Cerrar sesión</button>
+                    </form>
+                </div>
             </div>
         </div>
     </header>

@@ -6,10 +6,7 @@
                 <div class="footer-item">
                     <h4 class="mb-4 text-black">Acerca de DesireCloset</h4>
                     <p class="text-info">No puede ser más fácil empezar con tu propio negocio de vender bragas. Hazte miembro ahora para beneficiarte de todas las herramientas que hemos diseñado para que vender sea sencillo, simple y con beneficios.</p>
-                    <div class="position-relative mx-auto rounded-pill">
-                        <input class="form-control rounded-pill border-0 w-100 py-3 ps-4 pe-5" type="text" placeholder="Introduce tu email">
-                        <button type="button" class="btn btn-info btn-outline-white rounded-pill position-absolute top-0 end-0 py-2 mt-2 me-2">SignUp</button>
-                    </div>
+                    
                 </div>
             </div>
             <div class="col-md-6 col-lg-6 col-xl-3">
