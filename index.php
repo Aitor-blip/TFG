@@ -6,33 +6,34 @@
     <title>DesireCloset</title>
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/css/bootstrap.min.css" rel="stylesheet">
+    <link href="./assets/css/style.css" rel="stylesheet">
 </head>
-<body class="background-image">
+<body>
 
 <!-- CONTENIDO -->
-<div class="container-fluid d-flex align-items-center justify-content-center min-vh-100 ">
+<div class="index container-fluid d-flex align-items-center justify-content-center min-vh-100 ">
     <div class="row justify-content-center w-auto ">
         <div class="col-lg-12 col-md-10 col-sm-12 ">
             <div class="card custom-card bg-black">
                 <div class="card-body">
-                    <h1 class="card-title text-info">¿Eres mayor de edad?</h1>
+                    <h1 class="card-title text-danger">¿Eres mayor de edad?</h1>
                      <form id="ageForm" action="vista/principal.php" method="POST">
-                        <div class="row mb-3 text-info">
+                        <div class="row mb-3 text-danger">
                             <h3> Introduce tu fecha de nacimiento: </h3><br>
                             <div class="col">
-                                <label for="fecha_dia" class="form-label text-info">Día:</label>
+                                <label for="fecha_dia" class="form-label text-danger">Día:</label>
                                 <input type="number" class="form-control" id="fecha_dia" name="fecha_dia" min="1" max="31" required>
                             </div>
                             <div class="col">
-                                <label for="fecha_mes" class="form-label text-info">Mes:</label>
+                                <label for="fecha_mes" class="form-label text-danger">Mes:</label>
                                 <input type="number" class="form-control" id="fecha_mes" name="fecha_mes" min="1" max="12" required>
                             </div>
                             <div class="col">
-                                <label for="fecha_anio" class="form-label text-info">Año:</label>
+                                <label for="fecha_anio" class="form-label text-danger">Año:</label>
                                 <input type="number" class="form-control" id="fecha_anio" name="fecha_anio" min="1900" max="<?php echo date('Y');?>" required>
                             </div>
                         </div>
-                        <button type="button" onclick="validarEdad()" class="btn btn-info">Comprobar</button>
+                        <button type="button" onclick="validarEdad()" class="btn btn-danger">Comprobar</button>
                     </form>
                 </div>
             </div>
@@ -80,7 +81,7 @@
                 title: 'Oops...',
                 text: 'La fecha de nacimiento no puede ser después de la fecha actual'
             });
-            return; // Detener la ejecución de la función si la fecha es después de hoy
+            return;
         }
 
         // Calcular la edad

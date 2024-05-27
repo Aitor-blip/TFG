@@ -1,0 +1,132 @@
+
+/*INDEX*/
+.background-image {
+    background-image: url('../img/inicio.jpg'); /* Ruta de la imagen de fondo */
+    background-size: cover; /* Cubrir todo el cuerpo */
+    background-position: center; /* Centrar la imagen */
+}
+
+
+
+
+/* Variables globales */
+:root {
+    --primary-color: #17a2b8; /* Color principal para botones e íconos */
+    --text-color: #333; /* Color principal del texto */
+    --background-color: #fff; /* Color de fondo general */
+    --header-footer-bg: #000; /* Color de fondo para cabecera y pie de página */
+}
+
+/* Estilos básicos */
+body, html {
+    margin: 0;
+    padding: 0;
+    font-family: 'Roboto', sans-serif; /* Asegúrate de que la fuente Roboto está cargada */
+    color: var(--text-color);
+    background-color: var(--background-color);
+}
+
+a {
+    color: var(--primary-color);
+    text-decoration: none; /* Elimina el subrayado de los enlaces */
+}
+
+a:hover {
+    text-decoration: underline; /* Añade un subrayado al pasar el ratón por encima para mejorar la accesibilidad */
+}
+
+/* Encabezado y pie de página */
+header, footer {
+    background-color: var(--header-footer-bg);
+    color: white;
+    padding: 10px 0;
+    text-align: center;
+}
+
+/* Navbar estilos */
+.navbar {
+    background-color: var(--primary-color);
+}
+
+.navbar .navbar-nav .nav-link {
+    color: white;
+}
+
+.navbar .navbar-nav .nav-link:hover,
+.navbar .navbar-nav .nav-link.active {
+    background-color: darken(var(--primary-color), 10%);
+}
+
+/* Carrusel */
+.carousel-item {
+    text-align: center;
+    color: white;
+}
+
+.carousel-caption {
+    background-color: rgba(0, 0, 0, 0.5); /* Semi-transparente para mejorar la legibilidad */
+    border-radius: 5px;
+    padding: 10px;
+}
+
+/* Secciones de contenido */
+.container {
+    padding: 20px;
+}
+
+.section-title {
+    color: var(--primary-color);
+    margin-bottom: 15px;
+}
+
+.img-fluid {
+    max-width: 100%;
+    height: auto;
+}
+
+/* Estilos de los botones */
+.btn {
+    border: none;
+    border-radius: 5px;
+    padding: 10px 20px;
+}
+
+.btn-outline-light {
+    border-color: white;
+    color: white;
+}
+
+.btn-outline-light:hover {
+    background-color: white;
+    color: var(--primary-color);
+}
+
+#featured-photos {
+    background-color: #f8f9fa; /* Un fondo claro para destacar la sección */
+    padding: 20px 0;
+}
+
+#featured-photos .card {
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Sombra suave para las tarjetas */
+    transition: transform 0.3s ease-in-out; /* Efecto de transformación al pasar el ratón */
+}
+
+#featured-photos .card:hover {
+    transform: translateY(-5px); /* Levanta la tarjeta al pasar el ratón */
+}
+
+#featured-photos .card-img-top {
+    height: 200px; /* Altura fija para las imágenes */
+    object-fit: cover; /* Asegura que las imágenes cubran completamente el espacio asignado */
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .navbar .navbar-nav .nav-link {
+        padding: 10px; /* Aumenta el padding para un mejor toque en pantallas táctiles */
+    }
+
+    header, .carousel-caption {
+        text-align: center; /* Asegura que todo esté centrado en dispositivos móviles */
+    }
+}

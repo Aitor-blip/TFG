@@ -1,16 +1,104 @@
+<?php
+require_once '../config/conexion.php';
+
+if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+    $nombreUsuario = $_POST['nombreUsuario'];
+    $password = password_hash($_POST['password'], PASSWORD_DEFAULT);
+    $email = $_POST['email'];
+    $nombre = $_POST['nombre'];
+    $apellidos1 = $_POST['apellidos1'];
+    $apellidos2 = $_POST['apellidos2'];
+    $sexo = $_POST['sexo'];
+    $fechaNacimiento = $_POST['fechaNacimiento'];
+    $descripcion = $_POST['descripcion'];
+    $fotoPerfil = $_FILES['foto']['name'];
+    $dniFoto = $_FILES['dni']['tmp_name'];
+    $idRol = 2; // ID del rol "usuario"
+
+    // Subir foto de perfil
+    if (!empty($fotoPerfil)) {
+        $fotoTempPerfil = $_FILES['foto']['tmp_name'];
+        $hashedFotoPerfil = md5_file($fotoTempPerfil) . "_" . basename($fotoPerfil);
+        $rutaFotoPerfil = "../assets/uploads/$hashedFotoPerfil";
+        if (!move_uploaded_file($fotoTempPerfil, $rutaFotoPerfil)) {
+            $error = "Error al subir la foto de perfil.";
+            header("Location: ../vista/registro.php?error=" . urlencode($error));
+            exit();
+        }
+    } else {
+        $rutaFotoPerfil = null;
+    }
+
+    // Cifrar la imagen del DNI
+    $encryption_key = 'clave_secreta'; 
+    $dniData = file_get_contents($dniFoto);
+    $dniCifrado = openssl_encrypt($dniData, 'aes-256-cbc', $encryption_key, 0, $iv = openssl_random_pseudo_bytes(openssl_cipher_iv_length('aes-256-cbc')));
+    $dniCifrado = base64_encode($iv . $dniCifrado);
+
+    // Conectar a la base de datos
+    try {
+        $database = new Database();
+        $conn = $database->getConnection();
+    } catch (PDOException $e) {
+        die("Error en la conexión: " . $e->getMessage());
+    }
+
+    try {
+        // Verificar si el correo electrónico ya está registrado
+        $stmt = $conn->prepare("SELECT COUNT(*) FROM Usuarios WHERE email = ?");
+        $stmt->execute([$email]);
+        if ($stmt->fetchColumn() > 0) {
+            throw new Exception("El correo electrónico ya está registrado. Por favor, utiliza otro correo electrónico.");
+        }
+
+        // Iniciar una transacción
+        $conn->beginTransaction();
+
+        // Insertar usuario en la tabla Usuarios
+        $stmt = $conn->prepare("INSERT INTO Usuarios (nombreUsuario, nombre, apellidos1, apellidos2, email, password, sexo, fechaNacimiento, descripcion, foto) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
+        $stmt->execute([$nombreUsuario, $nombre, $apellidos1, $apellidos2, $email, $password, $sexo, $fechaNacimiento, $descripcion, $hashedFotoPerfil]);
+        $idUsuario = $conn->lastInsertId();
+
+        // Asignar rol al usuario
+        $stmt = $conn->prepare("INSERT INTO Usuarios_Roles (idUsuario, idRol) VALUES (?, ?)");
+        $stmt->execute([$idUsuario, $idRol]);
+
+        // Insertar el DNI en la tabla ValidacionDNI
+        $estado = 'pendiente';
+        $fechaValidacion = date('Y-m-d');
+        $stmt = $conn->prepare("INSERT INTO ValidacionDNI (dni, estado, idUsuario, fechaValidacion) VALUES (?, ?, ?, ?)");
+        $stmt->execute([$dniCifrado, $estado, $idUsuario, $fechaValidacion]);
+
+        // Confirmar la transacción
+        $conn->commit();
+
+        header('Location: login.php?mensaje=Registro completado con éxito. Inicie sesión.');
+        exit;
+    } catch (PDOException $e) {
+        // En caso de error, revertir la transacción
+        if ($conn->inTransaction()) {
+            $conn->rollBack();
+        }
+        $error = "Error en el registro: " . $e->getMessage();
+        header("Location: ../vista/registro.php?error=" . urlencode($error));
+        exit();
+    } catch (Exception $e) {
+        $error = "Error en el registro: " . $e->getMessage();
+        header("Location: ../vista/registro.php?error=" . urlencode($error));
+        exit();
+    }
+}
+?>
+
 <?php include '../includes/header.php'; ?>
 
 <section class="registro container py-5">
     <h2 class="text-center mb-4">REGÍSTRATE COMO NUEVO USUARIO</h2>
-    <form id="registrationForm" action="../controlador/registro_controlador.php" method="post" enctype="multipart/form-data" class="needs-validation" novalidate>
+    <?php if (isset($_GET['error'])): ?>
+        <div class="alert alert-danger text-center"><?php echo $_GET['error']; ?></div>
+    <?php endif; ?>
+    <form id="registrationForm" action="registro.php" method="post" enctype="multipart/form-data" class="needs-validation" novalidate>
         <div class="row">
-            <div class="col-12 mb-3">
-                <select class="form-select" aria-label="Seleccionar Rol" id="tipoUsuario" name="tipoUsuario" required>
-                    <option value="" disabled selected>Seleccione un rol</option>
-                    <option value="comprador">Comprador</option>
-                    <option value="vendedor">Vendedor</option>
-                </select>
-            </div>
         </div>
         <div class="row">
             <div class="col-md-6">
@@ -62,7 +150,8 @@
                 <h4 class="mb-3">DATOS PERFIL</h4>
                 <div class="form-group mb-3">
                     <label for="foto" class="form-label">Foto de Perfil</label>
-                    <input type="file" class="form-control" id="foto" name="foto">
+                    <input type="file" class="form-control" id="foto" name="foto" onchange="previewImage(event)">
+                    <img id="fotoPreview" src="#" alt="Previsualización de Foto de Perfil" class="img-fluid rounded-circle mt-2" style="display: none; width: 150px; height: 150px;">
                 </div>
                 <div class="form-group mb-3">
                     <label for="descripcion" class="form-label">Descripción</label>
@@ -88,28 +177,10 @@
                     <input type="file" class="form-control" id="dni" name="dni" required>
                     <div class="invalid-feedback">Por favor, suba una foto de su DNI.</div>
                 </div>
-                <button type="submit" class="btn btn-info btn-block">REGISTRARSE</button>
+                <button type="submit" class="btn btn-danger btn-block">REGISTRARSE</button>
             </div>
         </div>
     </form>
 </section>
-
-<script>
-    (function() {
-        'use strict';
-        window.addEventListener('load', function() {
-            var forms = document.getElementsByClassName('needs-validation');
-            Array.prototype.filter.call(forms, function(form) {
-                form.addEventListener('submit', function(event) {
-                    if (form.checkValidity() === false) {
-                        event.preventDefault();
-                        event.stopPropagation();
-                    }
-                    form.classList.add('was-validated');
-                }, false);
-            });
-        }, false);
-    })();
-</script>
 
 <?php include '../includes/footer.php'; ?>

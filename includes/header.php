@@ -7,67 +7,103 @@
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">
-    <link href="assets/css/style.css" rel="stylesheet">
+    <link href="../assets/css/style.css" rel="stylesheet">
 </head>
 <body>
-    <header class="copyright py-3" style="background-color: #000000;">
-        <div class="container px-0">
-            <div class="row align-items-center">
-                <div class="col-lg-8">
-                    <div class="d-flex flex-wrap align-items-center">
-                        <a href="#" class="navbar-brand">
-                            <img src="../assets/img/logo.jpg" alt="Logo de DesireCloset" class="logo" style="width:100px;">
-                        </a>
-                        <div class="ms-2">
-                            <h2 class="text-info display-6 mb-0">DesireCloset</h2>
-                            <h5 class="text-info text-center display-10 mb-0">Conectando Fantasias</h5>
-                        </div>
+    <?php
+    if (session_status() == PHP_SESSION_NONE) {
+        session_start();
+    }
+    $isLoggedIn = isset($_SESSION['user_id']);
+    ?>
+    <header class="py-3" style="background-color: #000000;">
+        <div class="header container">
+            <div class="row align-items-center justify-content-between">
+                <div class="col-lg-8 d-flex align-items-center">
+                    <a href="#" class="navbar-brand">
+                        <img src="
+                        <?php if(isset($rutaLogo)){
+                            echo $rutaLogo;
+                        }?>../assets/img/logo.jpg" alt="Logo de DesireCloset" class="logo" style="width:100px;">
+                    </a>
+                    <div class="ms-2">
+                        <h2 class="text-danger display-6 mb-0">DesireCloset</h2>
+                        <h5 class="text-danger text-center display-10 mb-0">Conectando Fantasías</h5>
                     </div>
                 </div>
-               
+                <div class="col-lg-4 d-flex align-items-center justify-content-end">
+                    <form class="d-flex me-3" action="/busqueda.php" method="GET">
+                        <input class="form-control me-2" type="search" name="busqueda" placeholder="Buscar" aria-label="Buscar">
+                        <button type="submit" class="btn btn-danger"><i class="fas fa-search"></i></button>
+                    </form>
+                    <ul class="navbar-nav d-flex flex-row ">
+                        <li class="nav-item"><a class="nav-link text-danger me-3" href="<?php if(isset($rutaMiPerfil)){
+                            echo $rutaMiPerfil."/miperfil.php";
+                        }else{
+                            echo '../vista/miperfil.php';
+                        }?>"><i class="fas fa-user fa-lg"></i></a></li>
+                        <?php if ($isLoggedIn): 
+                            ?>
+                            <li class="nav-item dropdown">
+                                <a class="nav-link text-danger dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                    <i class="fas fa-cog fa-lg"></i>
+                                </a>
+                                <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
+                                    <li><a class="dropdown-item" href="editar_perfil.php"><i class="fas fa-pencil-alt"></i> Editar perfil</a></li>
+                                    <li>
+                                        <form action="borrar_perfil.php" method="post">
+                                            <input type="hidden" name="confirm_delete" value="yes">
+                                            <button type="submit" class="dropdown-item"><i class="fas fa-trash-alt"></i> Borrar perfil</button>
+                                        </form>
+                                    </li>
+                                    <li><a class="dropdown-item" href="ver_informacion.php"><i class="fas fa-info-circle"></i> Ver información</a></li>
+                                    <li><hr class="dropdown-divider"></li>
+                                    <li>
+                                        <form action="../vista/logout.php" method="post" class="dropdown-item p-0">
+                                            <button type="submit" class="btn btn-link text-danger p-0 m-0"><i class="fas fa-sign-out-alt fa-lg"></i> Cerrar sesión</button>
+                                        </form>
+                                    </li>
+                                </ul>
+                            </li>
+                        <?php 
+                            endif;
+                             ?>
+                    </ul>
+                </div>
             </div>
         </div>
     </header>
-    <nav class="navbar navbar-expand-lg navbar-light bg-info">
+    <nav class="navbar navbar-expand-lg navbar-light bg-danger">
         <div class="container">
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
             <div class="collapse navbar-collapse" id="navbarCollapse">
-                <ul class="navbar-nav mx-auto border-top">
-                    <li class="nav-item"><a href="../vista/principal.php" class="nav-link active ml-2 fs-4">Inicio</a></li>
-                    <li class="nav-item"><a href="../php/contacto.php" class="nav-link ml-2 fs-4">Contacto</a></li>
-                    <li class="nav-item"><a href="../php/blog.php" class="nav-link ml-2 fs-4">Blog</a></li>
-                    <li class="nav-item dropdown">
-                        <a href="#" class="nav-link dropdown-toggle ml-2 fs-4" role="button" data-bs-toggle="dropdown" aria-expanded="false">Categorias</a>
-                        <div class="dropdown-menu">
-                            <a href="../vista/todos.php" class="dropdown-item">Todo</a>
-                            <a href="../vista/braga.php" class="dropdown-item">Bragas y Tangas</a>
-                            <a href="../vista/sujetadores.php" class="dropdown-item">Sujetadores</a>
-                            <a href="../vista/fotosdepies.php" class="dropdown-item">Fotos de pies</a>
-                            <a href="../vista/juguetessexuales.php" class="dropdown-item">Juguetes sexuales</a>
-                            <a href="../vista/otros.php" class="dropdown-item">Otros</a>
-                        </div>
-                    </li>
-                    <li class="nav-item dropdown">
-                        <a href="#" class="nav-link dropdown-toggle ml-2 fs-4" role="button" data-bs-toggle="dropdown" aria-expanded="false">Más</a>
-                        <ul class="dropdown-menu">
-                            <li><a class="dropdown-item" href="#">Preguntas Frecuentes</a></li>
-                            <li><a class="dropdown-item" href="#">Política de Privacidad</a></li>
-                            <li><a class="dropdown-item" href="#">Términos de Servicio</a></li>
-                        </ul>
-                    </li>
-                </ul>
-                <form class="d-flex me-3" action="/ruta_de_busqueda.php" method="GET">
-                    <input class="form-control me-2" type="search" name="busqueda" placeholder="Buscar" aria-label="Buscar">
-                    <button type="submit" class="btn btn-info"><i class="fas fa-search"></i></button>
-                </form>
-                <ul class="navbar-nav">
-                    <li class="nav-item"><a class="nav-link" href="../vista/miperfil.php"><i class="fas fa-user fa-lg"></i></a></li>
-                    <li class="nav-item"><a class="nav-link" href="../vista/carrito.php"><i class="fas fa-shopping-cart fa-lg"></i></a></li>
+                <ul class="navbar-nav mx-auto">
+                    <?php if($idRol == 2){?>
+                        <li class="nav-item"><a href="../vista/principal.php" class="nav-link active fs-4">Home</a></li>
+                        <li class="nav-item"><a href="../vista/todos.php" class="nav-link fs-4">Todas las Categorías</a></li>
+                        <li class="nav-item"><a href="../vista/braga.php" class="nav-link fs-4">Braga y Tanga</a></li>
+                        <li class="nav-item"><a href="../vista/sujetadores.php" class="nav-link fs-4">Sujetadores</a></li>
+                        <li class="nav-item"><a href="../vista/fotosdepie.php" class="nav-link fs-4">Fotos de pies</a></li>
+                        <li class="nav-item"><a href="../vista/juguetessexuales.php" class="nav-link fs-4">Juguetes Sexuales</a></li>
+                    <?php } elseif($idRol==1){?>
+                        <li class="nav-item"><a href="../vista/principal.php" class="nav-link active fs-4">Home</a></li>
+                        <li class="nav-item"><a href="../vista/braga.php" class="nav-link fs-4">Braga y Tanga</a></li>
+                        <li class="nav-item"><a href="../vista/sujetadores.php" class="nav-link fs-4">Sujetadores</a></li>
+                        <li class="nav-item"><a href="../vista/fotosdepie.php" class="nav-link fs-4">Fotos de pies</a></li>
+                        <li class="nav-item"><a href="../vista/juguetessexuales.php" class="nav-link fs-4">Juguetes Sexuales</a></li>
+                        <li class="nav-item"><a href="../vista/administrador/usuarios/index.php" class="nav-link fs-4">Usuarios</a></li>
+                        <li class="nav-item"><a href="../vista/juguetessexuales.php" class="nav-link fs-4">Control de Venta</a></li>
+                    <?php }else{?>
+                        <li class="nav-item"><a href="../vista/principal.php" class="nav-link active fs-4">Home</a></li>
+                        <li class="nav-item"><a href="../vista/todos.php" class="nav-link fs-4">Todas las Categorías</a></li>
+                        <li class="nav-item"><a href="../vista/braga.php" class="nav-link fs-4">Braga y Tanga</a></li>
+                        <li class="nav-item"><a href="../vista/sujetadores.php" class="nav-link fs-4">Sujetadores</a></li>
+                        <li class="nav-item"><a href="../vista/fotosdepie.php" class="nav-link fs-4">Fotos de pies</a></li>
+                        <li class="nav-item"><a href="../vista/juguetessexuales.php" class="nav-link fs-4">Juguetes Sexuales</a></li>
+                    <?php } ?>
                 </ul>
             </div>
         </div>
     </nav>
-</body>
-</html>

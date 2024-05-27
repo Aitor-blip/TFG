@@ -1,6 +1,6 @@
 /* Variables globales */
 :root {
-    --primary-color: #17a2b8; /* Color principal para botones e íconos */
+    --primary-color: #dc3545; /* Color principal cambiado a rojo */
     --text-color: #333; /* Color principal del texto */
     --background-color: #fff; /* Color de fondo general */
     --header-footer-bg: #000; /* Color de fondo para cabecera y pie de página */
@@ -12,7 +12,15 @@ body, html {
     padding: 0;
     font-family: 'Roboto', sans-serif; /* Asegúrate de que la fuente Roboto está cargada */
     color: var(--text-color);
+}
+
+.index {
+    background-image: url('../img/inicio.jpg'); /* Ruta de la imagen de fondo */
     background-color: var(--background-color);
+    background-size: cover; /* Asegura que la imagen cubre todo el área */
+    background-position: center; /* Centra la imagen */
+    background-repeat: no-repeat; /* Evita que la imagen se repita */
+    background-attachment: fixed; /* La imagen se queda fija en el fondo */
 }
 
 a {
@@ -25,7 +33,7 @@ a:hover {
 }
 
 /* Encabezado y pie de página */
-header, footer {
+header {
     background-color: var(--header-footer-bg);
     color: white;
     padding: 10px 0;
@@ -90,11 +98,20 @@ header, footer {
     color: var(--primary-color);
 }
 
+.btn-primary {
+    background-color: var(--primary-color);
+    color: white;
+}
+
+.btn-primary:hover {
+    background-color: #c82333; /* Color más oscuro en hover */
+}
+
 /* Estilos específicos para la página de registro */
 .background-image {
-    background-image: url('assets/img/inicio.jpg');
-    background-size: cover; /* Cubrir todo el cuerpo */
-    background-position: center; /* Centrar la imagen */
+    background-image: url('./assets/img/inicio.jpg');
+    background-size: cover; 
+    background-position: center; 
 }
 
 /* Estilos para tarjetas */
@@ -135,11 +152,10 @@ header, footer {
     border-radius: 10px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     margin: 20px auto;
-    max-width: 800px;
 }
 
 .registro h2 {
-    color: #17a2b8; /* Color principal */
+    color: #dc3545; /* Color principal cambiado a rojo */
     margin-bottom: 20px;
     font-size: 1.75rem;
 }
@@ -149,7 +165,7 @@ header, footer {
 }
 
 .registro .form-label {
-    color: #17a2b8; /* Color principal */
+    color: #dc3545; /* Color principal cambiado a rojo */
 }
 
 .registro .form-control {
@@ -158,11 +174,11 @@ header, footer {
 }
 
 .registro .form-check-label {
-    color: #17a2b8; /* Color principal */
+    color: #dc3545; /* Color principal cambiado a rojo */
 }
 
 .registro .btn {
-    background-color: #17a2b8; /* Color principal */
+    background-color: #dc3545; /* Color principal cambiado a rojo */
     border: none;
     border-radius: 5px;
     padding: 10px 20px;
@@ -171,7 +187,7 @@ header, footer {
 }
 
 .registro .btn:hover {
-    background-color: #138496; /* Color más oscuro en hover */
+    background-color: #c82333; /* Color más oscuro en hover */
 }
 
 .invalid-feedback {
@@ -186,7 +202,7 @@ header, footer {
 /* Estilos del perfil */
 .perfil {
     padding-top: 50px; /* Espacio entre el header y el contenido */
-    padding-bottom: 50px; 
+    padding-bottom: 50px;
 }
 
 .perfil .row {
@@ -199,7 +215,7 @@ header, footer {
 }
 
 .perfil .card img {
-    height: 250px !important; /* Altura fija para las imágenes */
+    height: 300px !important; /* Altura fija para las imágenes */
     object-fit: cover !important; /* Asegura que las imágenes cubran completamente el espacio asignado */
     width: 100% !important; /* Asegura que las imágenes cubran todo el ancho de la tarjeta */
 }
@@ -209,17 +225,17 @@ header, footer {
 }
 
 .perfil .nav-tabs {
-    border-bottom: 2px solid #007bff;
+    border-bottom: 2px solid #dc3545; /* Color cambiado a rojo */
 }
 
 .perfil .nav-link {
-    color: #007bff;
+    color: #dc3545; /* Color cambiado a rojo */
     font-weight: bold;
 }
 
 .perfil .nav-link.active {
-    color: #0056b3;
-    border-color: #0056b3;
+    color: #bd2130; /* Color cambiado a un rojo más oscuro */
+    border-color: #bd2130; /* Color cambiado a un rojo más oscuro */
 }
 
 /* Estilos de la sección "Sobre mí" */
@@ -244,9 +260,6 @@ header, footer {
     display: flex;
     justify-content: center;
     align-items: center;
-    height: 150px;
-    width: 150px;
-    margin: 0 auto 20px auto;
 }
 
 .profile-icon-wrapper i {
@@ -257,6 +270,55 @@ header, footer {
 /* Estilos adicionales para asegurar que las imágenes de los productos sean del mismo tamaño */
 .fixed-size-img {
     width: 100% !important;
-    height: 250px !important;
+    height: 300px !important;
     object-fit: cover !important;
+}
+
+/* Footer */
+footer {
+    background-color: var(--header-footer-bg);
+    color: white;
+    padding: 20px 0;
+    text-align: center;
+    width: 100%;
+    position: relative;
+    bottom: 0;
+}
+
+.footer a {
+    color: white;
+    text-decoration: none;
+}
+
+.footer a:hover {
+    color: red;
+}
+
+.footer-item ul {
+    list-style: none;
+    padding: 0;
+}
+
+.footer-item ul li {
+    margin-bottom: 10px;
+}
+
+.btn-primary {
+    background-color: #dc3545;
+    color: white;
+}
+
+.btn-primary:hover {
+    background-color: #c82333;
+    color: white;
+}
+
+/* Estilos específicos para el botón de "Subir productos" */
+.btn-subir-productos {
+    background-color: var(--primary-color);
+    color: white;
+}
+
+.btn-subir-productos:hover {
+    background-color: #bd2130; /* Rojo más oscuro al pasar el ratón por encima */
 }

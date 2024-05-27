@@ -1,9 +1,9 @@
 <?php
 class Database {
     private $host = 'localhost';
-    private $db_name = 'DesireCloset';
-    private $username = 'kk';
-    private $password = '';
+    private $db_name = 'desirecloset';
+    private $username = 'root';
+    private $password = 'aitor2002';
     private $conn;
 
     public function getConnection() {
@@ -18,5 +18,30 @@ class Database {
 
         return $this->conn;
     }
+
+
+    public  function getIdRolByEmailUser($email){
+        try{
+            $sql="SELECT idRol FROM usuarios_roles inner join Usuarios on usuarios.idUsuario= usuarios_roles.idUsuario where usuarios.email='$email'; ";
+            $consulta = $this->conn->prepare($sql);
+            $consulta->execute();
+            return $consulta->fetch(PDO::FETCH_LAZY)['idRol'];
+        }catch(PDOException $e){
+            echo $e->getMessage();
+        } 
+    }
+
+    public  function getRutaFotoByIdProducto($id){
+        try{
+            $sql="SELECT nombreFoto FROM fotos inner join productos on productos.idProducto= fotos.idProducto where fotos.idProducto=$id";
+            $consulta = $this->conn->prepare($sql);
+            $consulta->execute();
+            return $consulta->fetch(PDO::FETCH_LAZY)['nombreFoto'];
+        }catch(PDOException $e){
+            echo $e->getMessage();
+        } 
+    }
+
 }
+
 ?>
